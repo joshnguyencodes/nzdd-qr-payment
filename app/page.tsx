@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useCallback } from 'react';
+import { useCallback, Suspense } from 'react';
 import { useAccount } from 'wagmi';
 import { baseSepolia } from 'viem/chains';
 // import { Sepolia } from viem/chains;
@@ -76,6 +76,7 @@ export default function App() {
   console.log("Transfer Amount Sent:", calls[0].args[1]);
 
   return (
+      <Suspense fallback={<div>Loading...</div>}>
     <div className="flex flex-col min-h-screen font-sans dark:bg-background dark:text-white bg-white text-black">
       {/* Header */}
       <header className="px-4 py-4 bg-gray-100 dark:bg-gray-800">
@@ -161,5 +162,6 @@ export default function App() {
         </div>
       </main>
     </div>
+        </Suspense>
   );
 }
