@@ -152,7 +152,7 @@ function AppContent() {
               ) : (
                 <div className="text-center text-gray-700 text-lg">
                   <p className="mb-2 font-semibold">
-                    Welcome, Payer!
+                    Welcome!
                   </p>
                   <p>
                     To make a payment, please scan a merchant’s QR code.
@@ -193,7 +193,7 @@ function AppContent() {
             <div className="text-gray-700 text-left space-y-2 text-lg leading-relaxed">
               <ol className="list-decimal ml-5 space-y-2">
                 <li>
-                  <strong>Connect Wallet:</strong> Click the "Connect Wallet" button in the top-right corner.
+                  <strong>Connect Wallet:</strong> Click the 'Connect Wallet' button in the top-right corner.
                 </li>
                 <li>
                   <strong>Create QR Code:</strong> If you're a merchant, click "Create your QR code", enter an amount and choose an address, then generate your code.
