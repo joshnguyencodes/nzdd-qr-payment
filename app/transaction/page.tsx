@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import QRCode from "react-qr-code";
-import React, { FormEvent } from 'react';
 
 export default function TransactionPage() {
   const router = useRouter();
@@ -14,7 +13,9 @@ export default function TransactionPage() {
   const [loading, setLoading] = useState(false);
 
   // State for managing crypto addresses
-  const [addresses, setAddresses] = useState([]);
+  const [addresses, setAddresses] = useState<
+    { name: string; address: string }[]
+  >([]);
   const [selectedAddress, setSelectedAddress] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [newAddress, setNewAddress] = useState("");
@@ -22,29 +23,24 @@ export default function TransactionPage() {
 
   // Function to generate QR code
   const generateQR = async () => {
+    // Validate the amount input
     if (!value || isNaN(Number(value)) || Number(value) <= 0) {
       alert("Please enter a valid amount.");
       return;
     }
 
+    // Validate that an address is selected
+    if (!selectedAddress) {
+      alert("Please select a crypto address.");
+      return;
+    }
+
     setLoading(true);
-
     try {
-      // Replace with your actual backend API endpoint
-      const response = await fetch("/api/generate-qr", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ amount: value, address: selectedAddress }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to generate QR code");
-      }
-
-      const data = await response.json();
-      setQrData(data.qrCode); // Expecting the backend to return a QR code value
+      // Construct the URL with query parameters.
+      // This URL will be scanned and opened in the payer's browser.
+      const qrUrl = `https://nzdd-qr-payment4.vercel.app/?address=${encodeURIComponent(selectedAddress)}&amount=${encodeURIComponent(value)}`;
+      setQrData(qrUrl);
     } catch (error) {
       alert("Error generating QR code. Please try again.");
       console.error(error);
@@ -54,7 +50,7 @@ export default function TransactionPage() {
   };
 
   // Handle form submission for QR generation
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     await generateQR();
   };
@@ -95,7 +91,10 @@ export default function TransactionPage() {
         {/* Dropdown for selecting a crypto address (if any exist) */}
         {addresses.length > 0 && (
           <div className="mb-4">
-            <label htmlFor="address-select" className="block text-gray-700 mb-1">
+            <label
+              htmlFor="address-select"
+              className="block text-gray-700 mb-1"
+            >
               Select Crypto Address:
             </label>
             <select

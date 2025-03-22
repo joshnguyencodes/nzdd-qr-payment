@@ -1,5 +1,10 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
+import { useCallback } from 'react';
+import { useAccount } from 'wagmi';
+import { baseSepolia } from 'viem/chains';
+// import { Sepolia } from viem/chains;
 import {
   ConnectWallet,
   Wallet,
@@ -7,7 +12,6 @@ import {
   WalletDropdownLink,
   WalletDropdownDisconnect,
 } from '@coinbase/onchainkit/wallet';
-
 import {
   Address,
   Avatar,
@@ -23,39 +27,24 @@ import {
   TransactionStatusAction,
   TransactionStatusLabel,
 } from '@coinbase/onchainkit/transaction';
-
-import type { LifecycleStatus} from '@coinbase/onchainkit/transaction';
 import ImageSvg from './svg/Image';
 import OnchainkitSvg from './svg/OnchainKit';
 import { FundButton } from '@coinbase/onchainkit/fund';
-import { useAccount } from 'wagmi';
-import { baseSepolia } from 'viem/chains';
-import { useCallback } from 'react';
-
-// const components = [
-//   {
-//     name: 'Transaction',
-//     url: 'https://onchainkit.xyz/transaction/transaction',
-//   },
-//   { name: 'Swap', url: 'https://onchainkit.xyz/swap/swap' },
-//   { name: 'Checkout', url: 'https://onchainkit.xyz/checkout/checkout' },
-//   { name: 'Wallet', url: 'https://onchainkit.xyz/wallet/wallet' },
-//   { name: 'Identity', url: 'https://onchainkit.xyz/identity/identity' },
-// ];
-//
-// const templates = [
-//   { name: 'NFT', url: 'https://github.com/coinbase/onchain-app-template' },
-//   { name: 'Commerce', url: 'https://github.com/coin/onchain-commerce-template' },
-//   { name: 'Fund', url: 'https://github.com/fakepixels/fund-component' },
-// ];
 
 export default function App() {
   const { address } = useAccount();
+  const searchParams = useSearchParams();
 
-  const charles_address = "0xDA34b84D67390cE27e03B898e23C88a92bb8743a";
-  console.log(charles_address);
+  // Retrieve the amount and requester address from the URL query parameters.
+  const requestedAmount = searchParams.get('amount');
+  const requesterAddress = searchParams.get('address');
 
-  const handleOnStatus = useCallback((status: LifecycleStatus) => {
+  // Fallback values or validations might be needed here.
+  const defaultRecipient = "0xDA34b84D67390cE27e03B898e23C88a92bb8743a";
+  const recipientAddress = requesterAddress || defaultRecipient;
+  const transferAmount = requestedAmount ? Number(requestedAmount) : 1;
+
+  const handleOnStatus = useCallback((status) => {
     console.log('LifecycleStatus', status);
   }, []);
 
@@ -65,50 +54,24 @@ export default function App() {
       type: 'function',
       name: 'transfer',
       inputs: [
-        {
-          type: "address",
-          name: "to",
-        },
-        {
-          type: "uint256",
-          name: "amount",
-        },
+        { type: "address", name: "to" },
+        { type: "uint256", name: "amount" },
       ],
-      outputs: [
-        {
-          type: 'bool',
-          name: '',
-        }
-      ],
+      outputs: [{ type: 'bool', name: '' }],
       stateMutability: 'nonpayable',
     },
   ] as const;
 
-  // ✅ Explicitly define calls type to avoid deep inference issues
-  interface Call {
-    address: string;
-    abi: typeof NZDDContractAbi;
-    functionName: string;
-    args: (string | number)[];
-  }
-
-  const calls: Call[] = [
+  // Use the dynamic values for the transaction call
+  const calls = [
     {
       address: NZDDContractAddress,
       abi: NZDDContractAbi,
       functionName: 'transfer',
-      args: [charles_address, 1],
+      args: [recipientAddress, transferAmount],
     }
   ];
-
-  // const calls = [
-  //   {
-  //     address: NZDDContractAddress,
-  //     abi: NZDDContractAbi,
-  //     functionName: 'transfer',
-  //     args: [charles_address, 1],
-  //   }
-  // ];
+  console.log("Transfer Amount Sent:", calls[0].args[1]);
 
   return (
     <div className="flex flex-col min-h-screen font-sans dark:bg-background dark:text-white bg-white text-black">
@@ -169,12 +132,13 @@ export default function App() {
               </code>.
             </p>
 
-            {/* Button Section */}
+            {/* Payment Button Section */}
             {address ? (
               <div className="flex flex-col items-center space-y-4">
                 <FundButton />
                 <Transaction
                   chainId={baseSepolia.id}
+                  // chainId={11155111}
                   calls={calls as unknown as any}
                   onStatus={handleOnStatus}
                 >
