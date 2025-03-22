@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import QRCode from "react-qr-code";
+import React, { FormEvent } from 'react';
 
 export default function TransactionPage() {
   const router = useRouter();
@@ -59,7 +60,7 @@ export default function TransactionPage() {
   };
 
   // Add a new crypto address from the modal
-  const addAddress = (e: Event) => {
+  const addAddress = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!newAddress) {
       alert("Please enter an address.");
