@@ -32,22 +32,22 @@ import { useAccount } from 'wagmi';
 import { baseSepolia } from 'viem/chains';
 import { useCallback } from 'react';
 
-const components = [
-  {
-    name: 'Transaction',
-    url: 'https://onchainkit.xyz/transaction/transaction',
-  },
-  { name: 'Swap', url: 'https://onchainkit.xyz/swap/swap' },
-  { name: 'Checkout', url: 'https://onchainkit.xyz/checkout/checkout' },
-  { name: 'Wallet', url: 'https://onchainkit.xyz/wallet/wallet' },
-  { name: 'Identity', url: 'https://onchainkit.xyz/identity/identity' },
-];
-
-const templates = [
-  { name: 'NFT', url: 'https://github.com/coinbase/onchain-app-template' },
-  { name: 'Commerce', url: 'https://github.com/coinbase/onchain-commerce-template' },
-  { name: 'Fund', url: 'https://github.com/fakepixels/fund-component' },
-];
+// const components = [
+//   {
+//     name: 'Transaction',
+//     url: 'https://onchainkit.xyz/transaction/transaction',
+//   },
+//   { name: 'Swap', url: 'https://onchainkit.xyz/swap/swap' },
+//   { name: 'Checkout', url: 'https://onchainkit.xyz/checkout/checkout' },
+//   { name: 'Wallet', url: 'https://onchainkit.xyz/wallet/wallet' },
+//   { name: 'Identity', url: 'https://onchainkit.xyz/identity/identity' },
+// ];
+//
+// const templates = [
+//   { name: 'NFT', url: 'https://github.com/coinbase/onchain-app-template' },
+//   { name: 'Commerce', url: 'https://github.com/coinbase/onchain-commerce-template' },
+//   { name: 'Fund', url: 'https://github.com/fakepixels/fund-component' },
+// ];
 
 export default function App() {
   const { address } = useAccount();
@@ -136,7 +136,7 @@ export default function App() {
       <main className="flex-grow flex items-center justify-center p-4">
         <div className="max-w-4xl w-full">
           <div className="flex flex-col items-center">
-            <img src="/media/hq720.jpg" alt="Description of the image" />
+            <img src="./media/hq720.jpg" alt="Description of the image" />
             <div className="w-1/3 mb-6">
               <ImageSvg />
             </div>
