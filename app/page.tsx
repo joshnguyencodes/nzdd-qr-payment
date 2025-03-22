@@ -31,7 +31,7 @@ import ImageSvg from './svg/Image';
 import OnchainkitSvg from './svg/OnchainKit';
 import { FundButton } from '@coinbase/onchainkit/fund';
 
-export default function App() {
+function AppContent() {
   const { address } = useAccount();
   const searchParams = useSearchParams();
 
@@ -42,7 +42,7 @@ export default function App() {
   // Fallback values or validations might be needed here.
   const defaultRecipient = "0xDA34b84D67390cE27e03B898e23C88a92bb8743a";
   const recipientAddress = requesterAddress || defaultRecipient;
-  const one_billion_boolars = 1000000000000000000;
+  const one_billion_boolars = 1000000;
   let transferAmount = requestedAmount ? Number(requestedAmount) : 1;
   transferAmount = transferAmount * one_billion_boolars;
 
@@ -163,5 +163,14 @@ export default function App() {
       </main>
     </div>
         </Suspense>
+  );
+}
+
+
+export default function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AppContent />
+    </Suspense>
   );
 }
