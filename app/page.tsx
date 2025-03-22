@@ -95,20 +95,37 @@ export default function App() {
 
 
   return (
+    <div className="flex flex-col min-h-screen font-sans dark:bg-background dark:text-white bg-white text-black">
+      <header className="pt-4 pr-4">
+        <div className="flex justify-end">
+          <div className="flex wallet-container">
 
-
-      <div className="flex flex-col min-h-screen font-sans dark:bg-background dark:text-white bg-white text-black">
-        <header className="pt-4 pr-4">
-          <div className="flex justify-end">
-            <div className="wallet-container">
-              <Wallet>
-                <ConnectWallet>
-                  <Avatar className="h-6 w-6" />
-                  <Name />
-                </ConnectWallet>
-                <WalletDropdown>
-                  <Identity className="px-4 pt-3 pb-2" hasCopyAddressOnClick>
-                    <Avatar />
+            <a
+                  href="/transaction/"
+                  className="
+                    inline-block
+                    px-4
+                    py-2
+                    rounded
+                    bg-blue-500
+                    text-white
+                    font-semibold
+                    hover:bg-blue-600
+                    transition-colors
+                    duration-200
+                    margin-right-100
+                  "
+                >
+                  Create your QR code
+            </a>
+            <Wallet>
+              <ConnectWallet>
+                <Avatar className="h-6 w-6" />
+                <Name />
+              </ConnectWallet>
+              <WalletDropdown>
+                <Identity className="px-4 pt-3 pb-2" hasCopyAddressOnClick>
+                  <Avatar />            
                     <Name />
                     <Address />
                     <EthBalance />
