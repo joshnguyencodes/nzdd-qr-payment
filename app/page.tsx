@@ -25,8 +25,6 @@ import {
 } from '@coinbase/onchainkit/transaction';
 
 import type { LifecycleStatus } from '@coinbase/onchainkit/transaction';
-import ImageSvg from './svg/Image';
-import OnchainkitSvg from './svg/OnchainKit';
 import { FundButton } from '@coinbase/onchainkit/fund';
 import { useAccount } from 'wagmi';
 import { baseSepolia } from 'viem/chains';
