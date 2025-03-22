@@ -45,7 +45,7 @@ import { useCallback } from 'react';
 //
 // const templates = [
 //   { name: 'NFT', url: 'https://github.com/coinbase/onchain-app-template' },
-//   { name: 'Commerce', url: 'https://github.com/coinbase/onchain-commerce-template' },
+//   { name: 'Commerce', url: 'https://github.com/coin/onchain-commerce-template' },
 //   { name: 'Fund', url: 'https://github.com/fakepixels/fund-component' },
 // ];
 
