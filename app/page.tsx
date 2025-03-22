@@ -58,8 +58,8 @@ export default function App() {
     console.log('LifecycleStatus', status);
   }, []);
 
-  const clickContractAddress = '0x67c97D1FB8184F038592b2109F854dfb09C77C75';
-  const clickContractAbi = [
+  const NZDDContractAddress = '0x0649fFCb4C950ce964eeBA6574FDfDE0478FDA5F';
+  const NZDDContractAbi = [
     {
       type: 'function',
       name: 'transfer',
@@ -86,10 +86,10 @@ export default function App() {
 
   const calls = [
     {
-      address: clickContractAddress,
-      abi: clickContractAbi,
+      address: NZDDContractAddress,
+      abi: NZDDContractAbi,
       functionName: 'transfer',
-      args: [address, 1000000],
+      args: [address, 1],
     }
   ];
 
@@ -163,13 +163,7 @@ export default function App() {
                               <TransactionStatusAction />
                             </TransactionStatus>
                           </Transaction>
-                          ) : (
-                          <Wallet>
-                            <ConnectWallet>
-                              <Avatar className='h-6 w-6' />
-                              <Name />
-                            </ConnectWallet>
-                          </Wallet>
+
 
 
                         </>
