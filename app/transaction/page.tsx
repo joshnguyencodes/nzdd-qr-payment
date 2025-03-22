@@ -59,7 +59,7 @@ export default function TransactionPage() {
   };
 
   // Add a new crypto address from the modal
-  const addAddress = (e) => {
+  const addAddress = (e: Event) => {
     e.preventDefault();
     if (!newAddress) {
       alert("Please enter an address.");
