@@ -13,9 +13,7 @@ export default function TransactionPage() {
   const [loading, setLoading] = useState(false);
 
   // State for managing crypto addresses
-  const [addresses, setAddresses] = useState<
-    { name: string; address: string }[]
-  >([]);
+  const [addresses, setAddresses] = useState<{ name: string; address: string }[]>([]);
   const [selectedAddress, setSelectedAddress] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [newAddress, setNewAddress] = useState("");
@@ -38,7 +36,6 @@ export default function TransactionPage() {
     setLoading(true);
     try {
       // Construct the URL with query parameters.
-      // This URL will be scanned and opened in the payer's browser.
       const siteUrl =
         typeof window !== "undefined" ? window.location.origin : "https://nzdd-qr-payment-two.vercel.app";
       const qrUrl = `${siteUrl}/?address=${encodeURIComponent(selectedAddress)}&amount=${encodeURIComponent(value)}`;
@@ -65,9 +62,18 @@ export default function TransactionPage() {
       return;
     }
     const newEntry = { name: newName || "Unnamed", address: newAddress };
+
+    // Append to addresses
     setAddresses((prev) => [...prev, newEntry]);
+    // Automatically select this new address
+    setSelectedAddress(newEntry.address);
+
+    // Clear input fields
     setNewAddress("");
     setNewName("");
+
+    // Close the modal
+    setShowModal(false);
   };
 
   return (
@@ -209,6 +215,8 @@ export default function TransactionPage() {
                 Add Address
               </button>
             </form>
+
+            {/* List of saved addresses */}
             {addresses.length > 0 && (
               <div className="mt-4">
                 <h3 className="text-lg font-semibold mb-2">Saved Addresses:</h3>
