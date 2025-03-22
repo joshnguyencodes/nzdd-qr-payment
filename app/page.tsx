@@ -120,9 +120,9 @@ function AppContent() {
         <div className="max-w-4xl w-full">
           <div className="flex flex-col items-center">
             <img src="./media/hq720.jpg" alt="Description of the image" />
-            <div className="w-1/3 mb-6">
-              <ImageSvg />
-            </div>
+            {/*<div className="w-1/3 mb-6">*/}
+            {/*  <ImageSvg />*/}
+            {/*</div>*/}
             <div className="flex justify-center mb-6">
               <a target="_blank" rel="noopener noreferrer" href="https://onchainkit.xyz">
                 <OnchainkitSvg className="dark:text-white text-black" />
