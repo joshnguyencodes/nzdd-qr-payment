@@ -124,16 +124,16 @@ function AppContent() {
             {/*  <ImageSvg />*/}
             {/*</div>*/}
             <div className="flex justify-center mb-6">
-              <a target="_blank" rel="noopener noreferrer" href="https://onchainkit.xyz">
-                <OnchainkitSvg className="dark:text-white text-black" />
-              </a>
-            </div>
-            <p className="text-center mb-6">
-              Get started by editing{' '}
-              <code className="p-1 ml-1 rounded dark:bg-gray-800 bg-gray-200">
-                app/page.tsx
-              </code>.
-            </p>
+            {/*  <a target="_blank" rel="noopener noreferrer" href="https://onchainkit.xyz">*/}
+            {/*    <OnchainkitSvg className="dark:text-white text-black" />*/}
+            {/*  </a>*/}
+            {/*</div>*/}
+            {/*<p className="text-center mb-6">*/}
+            {/*  Get started by editing{' '}*/}
+            {/*  <code className="p-1 ml-1 rounded dark:bg-gray-800 bg-gray-200">*/}
+            {/*    app/page.tsx*/}
+            {/*  </code>.*/}
+            {/*</p>*/}
 
             {/* Payment Button Section */}
             {address ? (
