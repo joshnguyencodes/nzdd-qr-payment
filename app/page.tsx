@@ -24,7 +24,7 @@ import {
   TransactionStatusLabel,
 } from '@coinbase/onchainkit/transaction';
 
-import type { LifecycleStatus } from '@coinbase/onchainkit/transaction';
+import type { LifecycleStatus} from '@coinbase/onchainkit/transaction';
 import ImageSvg from './svg/Image';
 import OnchainkitSvg from './svg/OnchainKit';
 import { FundButton } from '@coinbase/onchainkit/fund';
@@ -84,7 +84,15 @@ export default function App() {
     },
   ] as const;
 
-  const calls = [
+  // ✅ Explicitly define calls type to avoid deep inference issues
+  interface Call {
+    address: string;
+    abi: typeof NZDDContractAbi;
+    functionName: string;
+    args: (string | number)[];
+  }
+
+  const calls: Call[] = [
     {
       address: NZDDContractAddress,
       abi: NZDDContractAbi,
@@ -92,6 +100,15 @@ export default function App() {
       args: [charles_address, 1],
     }
   ];
+
+  // const calls = [
+  //   {
+  //     address: NZDDContractAddress,
+  //     abi: NZDDContractAbi,
+  //     functionName: 'transfer',
+  //     args: [charles_address, 1],
+  //   }
+  // ];
 
   return (
     <div className="flex flex-col min-h-screen font-sans dark:bg-background dark:text-white bg-white text-black">
@@ -158,7 +175,7 @@ export default function App() {
                 <FundButton />
                 <Transaction
                   chainId={baseSepolia.id}
-                  calls={calls}
+                  calls={calls as unknown as any}
                   onStatus={handleOnStatus}
                 >
                   <div className="flex flex-col items-center space-y-2">
