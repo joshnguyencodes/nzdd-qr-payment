@@ -115,17 +115,23 @@ function AppContent() {
             </Wallet>
           </div>
         </header>
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-extrabold text-gray-800 mb-2">
+            ScanPay
+          </h1>
+        </div>
 
         {/* Title / Hero Section */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-extrabold text-gray-800 mb-2">
+          <h2 className="text-2xl font-extrabold text-gray-800 mb-2">
             Crypto Payments Made Easy
-          </h1>
+          </h2>
           <p className="text-gray-600">
             If you are paying, scan a merchant&apos;s QR code to send crypto securely.
             If you are a merchant, create your QR code using the button above.
           </p>
         </div>
+
 
         {/* Payment Section */}
         <div className="flex flex-col items-center">
