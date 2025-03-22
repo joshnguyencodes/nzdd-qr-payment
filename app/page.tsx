@@ -31,6 +31,8 @@ import { FundButton } from '@coinbase/onchainkit/fund';
 import { useAccount } from 'wagmi';
 import { baseSepolia } from 'viem/chains';
 import { useCallback } from 'react';
+import { calls } from './calls';
+import Image from "next/image";
 
 // const components = [
 //   {
@@ -58,40 +60,6 @@ export default function App() {
   const handleOnStatus = useCallback((status: LifecycleStatus) => {
     console.log('LifecycleStatus', status);
   }, []);
-
-  const NZDDContractAddress = '0x0649fFCb4C950ce964eeBA6574FDfDE0478FDA5F';
-  const NZDDContractAbi = [
-    {
-      type: 'function',
-      name: 'transfer',
-      inputs: [
-        {
-          type: "address",
-          name: "to",
-        },
-        {
-          type: "uint256",
-          name: "amount",
-        },
-      ],
-      outputs: [
-        {
-          type: 'bool',
-          name: '',
-        }
-      ],
-      stateMutability: 'nonpayable',
-    },
-  ] as const;
-
-  const calls = [
-    {
-      address: NZDDContractAddress,
-      abi: NZDDContractAbi,
-      functionName: 'transfer',
-      args: [charles_address, 1],
-    }
-  ];
 
   return (
     <div className="flex flex-col min-h-screen font-sans dark:bg-background dark:text-white bg-white text-black">
@@ -136,21 +104,21 @@ export default function App() {
       <main className="flex-grow flex items-center justify-center p-4">
         <div className="max-w-4xl w-full">
           <div className="flex flex-col items-center">
-            <img src="./media/hq720.jpg" alt="Description of the image" />
-            <div className="w-1/3 mb-6">
-              <ImageSvg />
-            </div>
-            <div className="flex justify-center mb-6">
-              <a target="_blank" rel="noopener noreferrer" href="https://onchainkit.xyz">
-                <OnchainkitSvg className="dark:text-white text-black" />
-              </a>
-            </div>
-            <p className="text-center mb-6">
-              Get started by editing{' '}
-              <code className="p-1 ml-1 rounded dark:bg-gray-800 bg-gray-200">
-                app/page.tsx
-              </code>.
-            </p>
+            <Image src="/media/hq720.jpg" alt="Description of the image" width={500} height={500}/>
+            {/*<div className="w-1/3 mb-6">*/}
+            {/*  <ImageSvg />*/}
+            {/*</div>*/}
+            {/*<div className="flex justify-center mb-6">*/}
+            {/*  <a target="_blank" rel="noopener noreferrer" href="https://onchainkit.xyz">*/}
+            {/*    <OnchainkitSvg className="dark:text-white text-black" />*/}
+            {/*  </a>*/}
+            {/*</div>*/}
+            {/*<p className="text-center mb-6">*/}
+            {/*  Get started by editing{' '}*/}
+            {/*  <code className="p-1 ml-1 rounded dark:bg-gray-800 bg-gray-200">*/}
+            {/*    app/page.tsx*/}
+            {/*  </code>.*/}
+            {/*</p>*/}
 
             {/* Button Section */}
             {address ? (
