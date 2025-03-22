@@ -14,9 +14,9 @@ export default function TransactionPage() {
 
   // Preload a demo wallet (hardcoded for demo purposes)
   const [addresses, setAddresses] = useState<{ name: string; address: string }[]>([
-    { name: "My Wallet!!", address: "0xDA34b84D67390cE27e03B898e23C88a92bb8743a\n" },
+    { name: "My Wallet!!", address: "0xDA34b84D67390cE27e03B898e23C88a92bb8743a" },
   ]);
-  const [selectedAddress, setSelectedAddress] = useState("0xDA34b84D67390cE27e03B898e23C88a92bb8743a\n");
+  const [selectedAddress, setSelectedAddress] = useState("0xDA34b84D67390cE27e03B898e23C88a92bb8743a");
   const [showModal, setShowModal] = useState(false);
   const [newAddress, setNewAddress] = useState("");
   const [newName, setNewName] = useState("");
