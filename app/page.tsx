@@ -122,7 +122,7 @@ function AppContent() {
             Crypto Payments Made Easy
           </h1>
           <p className="text-gray-600">
-            If you are paying, scan a merchant’s QR code to send crypto securely.
+            If you are paying, scan a merchant&apos;s QR code to send crypto securely.
             If you are a merchant, create your QR code using the button above.
           </p>
         </div>
@@ -144,9 +144,10 @@ function AppContent() {
                     calls={calls as unknown as any}
                     onStatus={handleOnStatus}
                   >
-                    <TransactionButton className="bg-blue-500 text-white font-semibold py-2 px-6 rounded-md hover:bg-blue-600 transition-colors">
-                      Pay Now
-                    </TransactionButton>
+                    {/* Note: Using a 'label' prop instead of children */}
+                    <TransactionButton
+                      className="bg-blue-500 text-white font-semibold py-2 px-6 rounded-md hover:bg-blue-600 transition-colors"
+                    />
                   </Transaction>
                 </div>
               ) : (
@@ -155,10 +156,10 @@ function AppContent() {
                     Welcome!
                   </p>
                   <p>
-                    To make a payment, please scan a merchant’s QR code.
+                    To make a payment, please scan a merchant&apos;s QR code.
                   </p>
                   <p className="mt-2">
-                    If you are a merchant, click <span className="font-bold">"Create your QR code"</span> above.
+                    If you are a merchant, click <span className="font-bold">&quot;Create your QR code&quot;</span> above.
                   </p>
                 </div>
               )}
@@ -193,13 +194,13 @@ function AppContent() {
             <div className="text-gray-700 text-left space-y-2 text-lg leading-relaxed">
               <ol className="list-decimal ml-5 space-y-2">
                 <li>
-                  <strong>Connect Wallet:</strong> Click the 'Connect Wallet' button in the top-right corner.
+                  <strong>Connect Wallet:</strong> Click the &apos;Connect Wallet&apos; button in the top-right corner.
                 </li>
                 <li>
-                  <strong>Create QR Code:</strong> If you're a merchant, click "Create your QR code", enter an amount and choose an address, then generate your code.
+                  <strong>Create QR Code:</strong> If you&apos;re a merchant, click &quot;Create your QR code&quot;, enter an amount and choose an address, then generate your code.
                 </li>
                 <li>
-                  <strong>Make Payment:</strong> If you're a payer, scan a merchant's QR code to initiate a payment. Your transaction will appear here with a "Pay Now" button.
+                  <strong>Make Payment:</strong> If you&apos;re a payer, scan a merchant&apos;s QR code to initiate a payment. Your transaction will appear here with a &apos;Pay Now&apos; button.
                 </li>
               </ol>
             </div>
