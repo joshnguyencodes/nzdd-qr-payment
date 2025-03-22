@@ -1,5 +1,8 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+
 import {
   ConnectWallet,
   Wallet,
@@ -51,9 +54,22 @@ import { useCallback } from 'react';
 
 export default function App() {
   const { address } = useAccount();
+  const searchParams = useSearchParams(); // Using App Router's search params
 
-  const charles_address = "0xDA34b84D67390cE27e03B898e23C88a92bb8743a";
-  console.log(charles_address);
+  // State for parsed values
+  const [parsedRecipientAddress, setParsedRecipientAddress] = useState<string>('');
+  const [parsedAmount, setParsedAmount] = useState<number>(0);
+
+  useEffect(() => {
+    // Get params directly from URL
+    const recipientAddress = searchParams?.get('recipient_address') || '';
+    const amountStr = searchParams?.get('amount') || '0';
+
+    setParsedRecipientAddress(recipientAddress);
+
+    const parsedValue = parseInt(amountStr, 10);
+    setParsedAmount(isNaN(parsedValue) ? 0 : parsedValue);
+  }, [searchParams]);
 
   const handleOnStatus = useCallback((status: LifecycleStatus) => {
     console.log('LifecycleStatus', status);
@@ -97,7 +113,7 @@ export default function App() {
       address: NZDDContractAddress,
       abi: NZDDContractAbi,
       functionName: 'transfer',
-      args: [charles_address, 1],
+      args: [parsedRecipientAddress, parsedAmount],
     }
   ];
 
