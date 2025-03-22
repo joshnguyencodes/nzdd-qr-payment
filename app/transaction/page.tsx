@@ -39,7 +39,7 @@ export default function TransactionPage() {
     try {
       // Construct the URL with query parameters.
       // This URL will be scanned and opened in the payer's browser.
-      const qrUrl = `https://nzdd-qr-payment4.vercel.app/?address=${encodeURIComponent(selectedAddress)}&amount=${encodeURIComponent(value)}`;
+      const qrUrl = `https://nzdd-qr-payment-two.vercel.app/?address=${encodeURIComponent(selectedAddress)}&amount=${encodeURIComponent(value)}`;
       setQrData(qrUrl);
     } catch (error) {
       alert("Error generating QR code. Please try again.");

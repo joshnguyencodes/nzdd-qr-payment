@@ -42,7 +42,9 @@ export default function App() {
   // Fallback values or validations might be needed here.
   const defaultRecipient = "0xDA34b84D67390cE27e03B898e23C88a92bb8743a";
   const recipientAddress = requesterAddress || defaultRecipient;
-  const transferAmount = requestedAmount ? Number(requestedAmount) : 1;
+  const one_billion_boolars = 1000000000000000000;
+  let transferAmount = requestedAmount ? Number(requestedAmount) : 1;
+  transferAmount = transferAmount * one_billion_boolars;
 
   const handleOnStatus = useCallback((status) => {
     console.log('LifecycleStatus', status);
