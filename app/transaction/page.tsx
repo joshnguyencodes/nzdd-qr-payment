@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import QRCode from "react-qr-code";
 
 export default function TransactionPage() {
+  const router = useRouter();
+
   // State for QR generation
   const [value, setValue] = useState("");
   const [qrData, setQrData] = useState("");
@@ -26,9 +29,7 @@ export default function TransactionPage() {
     setLoading(true);
 
     try {
-      console.log(selectedAddress);
-      console.log(value);
-      // Include the selectedAddress in your payload if needed
+      // Replace with your actual backend API endpoint
       const response = await fetch("/api/generate-qr", {
         method: "POST",
         headers: {
@@ -42,7 +43,7 @@ export default function TransactionPage() {
       }
 
       const data = await response.json();
-      setQrData(data.qrCode);
+      setQrData(data.qrCode); // Expecting the backend to return a QR code value
     } catch (error) {
       alert("Error generating QR code. Please try again.");
       console.error(error);
@@ -51,7 +52,7 @@ export default function TransactionPage() {
     }
   };
 
-  // Handle form submission for QR generation (triggered by Enter or button click)
+  // Handle form submission for QR generation
   const handleSubmit = async (e) => {
     e.preventDefault();
     await generateQR();
@@ -73,6 +74,16 @@ export default function TransactionPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 p-4">
       <div className="bg-white shadow-lg rounded-2xl p-6 max-w-lg w-full text-center">
+        {/* Back Button */}
+        <div className="flex justify-start mb-4">
+          <button
+            onClick={() => router.push("/")}
+            className="text-blue-600 hover:underline font-semibold"
+          >
+            &larr; Back to Home
+          </button>
+        </div>
+
         <h1 className="text-3xl font-extrabold text-gray-800 mb-4">
           💸 Secure Crypto Transaction
         </h1>
@@ -149,13 +160,19 @@ export default function TransactionPage() {
           <div className="bg-white rounded-lg shadow-lg p-6 w-96">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">Manage Crypto Addresses</h2>
-              <button onClick={() => setShowModal(false)} className="text-gray-600 hover:text-gray-800">
+              <button
+                onClick={() => setShowModal(false)}
+                className="text-gray-600 hover:text-gray-800"
+              >
                 &times;
               </button>
             </div>
             <form onSubmit={addAddress}>
               <div className="mb-4">
-                <label htmlFor="crypto-name" className="block text-gray-700 mb-1">
+                <label
+                  htmlFor="crypto-name"
+                  className="block text-gray-700 mb-1"
+                >
                   Name (optional):
                 </label>
                 <input
@@ -168,7 +185,10 @@ export default function TransactionPage() {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="crypto-address" className="block text-gray-700 mb-1">
+                <label
+                  htmlFor="crypto-address"
+                  className="block text-gray-700 mb-1"
+                >
                   Crypto Address:
                 </label>
                 <input
