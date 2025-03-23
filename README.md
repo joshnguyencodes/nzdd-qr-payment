@@ -1,3 +1,8 @@
+Fully deployed application [here](https://nzdd-qr-payment-two.vercel.app/)
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-onchain`]().
 
 
